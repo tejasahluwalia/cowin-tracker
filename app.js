@@ -43,7 +43,11 @@ async function checkAvailability() {
         sessions.map((session) => {
           if (
             session.min_age_limit == 45 &&
-            (center.name == 'Gobi GH' || center.name == 'Gobi GH 1')
+            session.vaccine == 'COVISHIELD' &&
+            (center.name == 'Gobi GH' ||
+              center.name == 'Gobi GH 1' ||
+              center.name == 'Siruvalur BPHC' ||
+              center.name == 'Siruvalur BPHC 1')
           ) {
             availableCenters.push({
               name: center.name,
@@ -64,7 +68,7 @@ async function checkAvailability() {
         console.log(new Date());
         availableCenters.map((center) => {
           console.log(
-            `Name: ${center.name}\nSlots: ${center.slots}\nAddress: ${center.address}\nDate: ${center.date}\nAvailable Capacity: ${center.available_capacity}\n-----\n`
+            `Name: ${center.name}\nDate: ${center.date}\nAvailable Capacity: ${center.available_capacity}\n-----\n`
           );
           if (center.available_capacity > 0) {
             axios.post(
